@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon File Manager</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --bg-color: #0a0a0c;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-shadow: 0 0 10px var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        .controls {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 5px var(--neon-blue);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        #explorer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            min-height: 300px;
+        }
+
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .item:active { transform: scale(0.9); }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 5px;
+        }
+
+        .pasta { text-shadow: 0 0 15px #ffcc00; color: #ffcc00; }
+        .arquivo { text-shadow: 0 0 15px var(--neon-pink); color: var(--neon-pink); }
+
+        .item span {
+            font-size: 12px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>NEON EXPLORER</h1>
+
+    <div class="controls">
+        <button onclick="adicionar('pasta')">+ PASTA</button>
+        <button onclick="adicionar('arquivo')" style="border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 0 0 5px var(--neon-pink);">+ ARQUIVO</button>
+        <button onclick="limpar()" style="border-color: red; color: red; box-shadow: none;">LIMPAR TUDO</button>
+    </div>
+
+    <div id="explorer">
+        </div>
+
+    <script>
+        const explorer = document.getElementById('explorer');
+        let itens = JSON.parse(localStorage.getItem('meus_arquivos')) || [];
+
+        function renderizar() {
+            explorer.innerHTML = '';
+            itens.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                const icone = item.tipo === 'pasta' ? '📁' : '📄';
+                const classeModo = item.tipo === 'pasta' ? 'pasta' : 'arquivo';
+                
+                div.innerHTML = `
+                    <div class="icon ${classeModo}">${icone}</div>
+                    <span>${item.nome}</span>
+                `;
+                
+                // Clique longo ou duplo para deletar
+                div.onclick = () => {
+                    if(confirm(`Deseja excluir "${item.nome}"?`)) {
+                        itens.splice(index, 1);
+                        salvar();
+                    }
+                };
+                
+                explorer.appendChild(div);
+            });
+        }
+
+        function adicionar(tipo) {
+            const nome = prompt(`Nome da ${tipo}:`);
+            if (nome) {
+                itens.push({ nome, tipo });
+                salvar();
+            }
+        }
+
+        function salvar() {
+            localStorage.setItem('meus_arquivos', JSON.stringify(itens));
+            renderizar();
+        }
+
+        function limpar() {
+            if(confirm("Apagar tudo?")) {
+                itens = [];
+                salvar();
+            }
+        }
+
+        renderizar();
+    </script>
+</body>
+  </html>
+  
