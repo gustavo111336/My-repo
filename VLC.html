@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nick Neon - Scatman Edition</title>
+    
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    
+    <style>
+        :root {
+            --nick-orange: #ff5f00;
+            --neon-cyan: #00f7ff;
+        }
+
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Título com efeito de Level do Geometry Dash */
+        .logo {
+            font-size: 3rem;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--nick-orange);
+            margin-bottom: 10px;
+        }
+
+        /* Container estilo "Splat" da Nick */
+        .video-main-container {
+            border: 5px solid var(--nick-orange);
+            border-radius: 40px 15px 40px 15px;
+            padding: 15px;
+            background: black;
+            box-shadow: 0 0 30px var(--nick-orange);
+            max-width: 90%;
+        }
+
+        .video-js {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        /* Botão de Play Estilo VLC com Glow */
+        .vjs-big-play-button {
+            background-color: rgba(0, 247, 255, 0.3) !important;
+            border: 2px solid var(--neon-cyan) !important;
+            box-shadow: 0 0 20px var(--neon-cyan) !important;
+            border-radius: 50% !important;
+            height: 2em !important;
+            width: 2em !important;
+            line-height: 2em !important;
+            margin-top: -1em !important;
+            margin-left: -1em !important;
+        }
+
+        .status-bar {
+            margin-top: 15px;
+            background: white;
+            color: black;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 0 15px white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">SCATMAN NEON</div>
+    
+    <div class="status-bar">NO AR: Scatman John - Scatman's World</div>
+
+    <br>
+
+    <div class="video-main-container">
+        <video id="my-player" class="video-js vjs-big-play-centered" controls preload="auto">
+            <source src="scatman.mp4" type="video/mp4" />
+            <p class="vjs-no-js">Para ver este vídeo, habilite o JavaScript.</p>
+        </video>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+</body>
+</html>
