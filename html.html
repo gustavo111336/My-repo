@@ -1,6 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <script>
+    // Cria estrelinhas que seguem o mouse
+    document.addEventListener('mousemove', function(e) {
+        let star = document.createElement('div');
+        star.innerHTML = '⭐';
+        star.style.position = 'fixed';
+        star.style.left = e.clientX + 'px';
+        star.style.top = e.clientY + 'px';
+        star.style.fontSize = '20px';
+        star.style.pointerEvents = 'none'; // Não atrapalha os cliques
+        star.style.transition = 'all 1s linear';
+        
+        document.body.appendChild(star);
+
+        // Animação para sumir e subir
+        setTimeout(() => {
+            star.style.transform = 'translateY(-50px) scale(0)';
+            star.style.opacity = '0';
+        }, 10);
+
+        // Remove do HTML para não travar o PC
+        setTimeout(() => {
+            star.remove();
+        }, 1000);
+    });
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site com Super Animações</title>
@@ -109,3 +136,4 @@
 
 </body>
 </html>
+
