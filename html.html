@@ -3,39 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site de Gatos</title>
+    <title>Site com Super Animações</title>
     <style>
+        /* 1. Animação de Fundo Gradiente */
         body {
-            background-color: rgb(92, 49, 173);
-            color: white; /* Cor do texto para contrastar com o roxo */
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centraliza tudo */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #5c31ad, #8e44ad, #3498db, #2c3e50);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 2. Animação de Entrada do Conteúdo */
+        .container {
+            text-align: center;
+            animation: slideUp 1.2s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
-            text-shadow: 2px 2px 4px black;
+            font-size: 3rem;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
-        img {
-            max-width: 100%; /* Garante que a foto não saia da tela */
-            height: auto;
-            border-radius: 15px; /* Deixa as bordas da foto arredondadas */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+
+        h1:hover {
+            transform: scale(1.1) rotate(2deg);
+            color: #f1c40f;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* 3. Animação de Flutuação da Imagem */
+        .gato-img {
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 5px solid rgba(255,255,255,0.2);
+            animation: float 3s ease-in-out infinite;
+            transition: filter 0.3s;
+        }
+
+        .gato-img:hover {
+            filter: brightness(1.2) contrast(1.1);
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 4. Linha Decorativa Animada */
+        .linha {
+            width: 0;
+            height: 4px;
+            background: #f1c40f;
+            margin: 10px auto;
+            border-radius: 2px;
+            animation: expandirLinha 2s forwards 1s;
+        }
+
+        @keyframes expandirLinha {
+            to { width: 80%; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao meu site</h1>
-    </header>
 
-    <main>
-        <h2>Meu site</h2>
-        <p>Este é um gato que achei na internet:</p>
-        <img src="download.jfif" alt="Um gato fofo da internet">
-    </main>
+    <div class="container">
+        <header>
+            <h1>Bem vindo ao meu site</h1>
+            <div class="linha"></div>
+        </header>
+
+        <main>
+            <h2>Meu site interativo</h2>
+            <p>Este é um gato que achei na internet (e ele flutua!)</p>
+            <img src="download.jfif" alt="Gato fofo animado" class="gato-img">
+        </main>
+    </div>
+
 </body>
-    </html>
-    
+</html>
