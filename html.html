@@ -27,6 +27,39 @@
         }, 1000);
     });
     </script>
+    <script>
+    function createStar(x, y) {
+        const star = document.createElement('div');
+        star.innerHTML = '⭐';
+        star.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            font-size: 20px;
+            pointer-events: none;
+            transition: all 1s linear;
+            z-index: 9999;
+        `;
+        document.body.appendChild(star);
+
+        setTimeout(() => {
+            star.style.transform = 'translateY(-50px) scale(0)';
+            star.style.opacity = '0';
+        }, 10);
+
+        setTimeout(() => star.remove(), 1000);
+    }
+
+    // Mouse
+    document.addEventListener('mousemove', (e) => createStar(e.clientX, e.clientY));
+
+    // Touch (Mobile)
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        createStar(touch.clientX, touch.clientY);
+    }, { passive: true });
+    </script>
+    
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,4 +169,5 @@
 
 </body>
 </html>
+
 
