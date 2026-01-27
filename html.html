@@ -2,6 +2,35 @@
 <html lang="pt-br">
 <head>
     <script>
+        document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const drop = document.createElement('div');
+    
+    // Estilização rápida via JS
+    drop.style.position = 'fixed';
+    drop.style.left = touch.clientX + 'px';
+    drop.style.top = touch.clientY + 'px';
+    drop.style.width = '20px';
+    drop.style.height = '20px';
+    drop.style.background = '#00d4ff';
+    drop.style.borderRadius = '50%';
+    drop.style.pointerEvents = 'none';
+    drop.style.boxShadow = '0 0 15px #00d4ff';
+    drop.style.zIndex = '9999';
+    
+    document.body.appendChild(drop);
+    
+    // Animação de sumir
+    drop.animate([
+        { transform: 'scale(1)', opacity: 1 },
+        { transform: 'scale(3)', opacity: 0 }
+    ], { duration: 500 });
+    
+    setTimeout(() => drop.remove(), 500);
+});
+         
+    </script>
+    <script>
     // Cria estrelinhas que seguem o mouse
     document.addEventListener('mousemove', function(e) {
         let star = document.createElement('div');
@@ -169,5 +198,6 @@
 
 </body>
 </html>
+
 
 
